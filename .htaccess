@@ -1,0 +1,15 @@
+
+RewriteRule ^([a-zA-Z0-9/ñÑ-]+)$ index.php?views=$1 
+# Habilita el motor de reescritura, permitiendo el uso de reglas de reescritura.
+RewriteEngine On
+# Configura las opciones para el servidor web.
+# 'All' incluye todas las opciones y -Indexes deshabilita la opción de mostrar listados de directorios.
+Options All -Indexes
+# La siguiente regla de reescritura se aplica a todas las solicitudes que coincidan con el patrón.
+# El patrón es una cadena que puede contener letras (mayúsculas y minúsculas), números y los caracteres especiales ñ y Ñ, así como la barra diagonal (/).
+# ^([a-zA-Z0-9/ñÑ-]+)$ representa el patrón de la URL solicitada.
+# ^ indica el principio de la cadena y $ indica el final de la cadena.
+# ([a-zA-Z0-9/ñÑ-]+) captura la parte de la URL que coincide con el patrón y la almacena en la variable $1.
+# Cuando se cumple la condición anterior, la solicitud se reescribe a index.php?views=$1.
+# Esto significa que, por ejemplo, si la URL solicitada es "/pagina/ejemplo", se reescribe como "index.php?views=pagina/ejemplo".
+RewriteRule ^([a-zA-Z0-9/ñÑ-]+)$ index.php?views=$1
