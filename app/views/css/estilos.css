@@ -1,0 +1,8 @@
+/* Selector combinado para <body> y <html> */
+body, html {
+    /* La altura se establece en 100% */
+    height: 100%;
+    /* El ancho se establece en 100% */
+    width: 100%;
+}
+
