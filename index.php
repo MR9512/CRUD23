@@ -25,7 +25,6 @@
             La directiva "require_once" asegura que el archivo se incluye solo una vez para evitar duplicados. -->
     </head>
     <body>
-        
         <?php require_once "app/views/inc/script.php"; ?>
         <!-- Incluye el contenido del archivo "script.php"  -->
     </body>

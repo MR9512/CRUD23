@@ -9,5 +9,8 @@ initial-scale=1.0 establece el nivel de zoom inicial cuando el documento se carg
 <link rel="stylesheet" href="<?php echo APP_URL; ?>app/views/css/bulma.min.css">
 <!-- Este elemento <link> se utiliza para vincular la hoja de estilo personalizado al documento HTML. -->
 <link rel="stylesheet" href="<?php echo APP_URL; ?>app/views/css/estilos.css">
+<!-- Este elemento <link> se utiliza para vincular la hoja de estilo de alertas al documento HTML. -->
+<link rel="stylesheet" href="<?php echo APP_URL; ?>app/views/css/sweetalert2.min.css">
+
 
 
