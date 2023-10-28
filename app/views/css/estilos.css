@@ -6,3 +6,20 @@ body, html {
     width: 100%;
 }
 
+/* Estilos para la clase main-container */
+.main-container {
+    height: 100%; /* Establece la altura del contenedor al 100% del contenedor padre */
+    width: 100; /* Error: Debería ser width: 100%; para establecer el ancho al 100% del contenedor padre */
+    display: flex; /* Usa el modelo de caja flexible para el contenedor */
+    justify-content: center; /* Centra los elementos horizontalmente dentro del contenedor */
+    align-items: center; /* Centra los elementos verticalmente dentro del contenedor */
+}
+
+/* Estilos para elementos hijos de main-container con clases login y hero-body */
+.main-container > .login,
+.main-container > .hero-body {
+    height: auto; /* La altura se ajustará automáticamente según el contenido */
+    width: 100%; /* Establece el ancho al 100% del contenedor padre */
+    max-width: 400px; /* Establece el ancho máximo del elemento hijo a 400px */
+    min-width: 300px; /* Establece el ancho mínimo del elemento hijo a 300px */
+}
