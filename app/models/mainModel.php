@@ -79,7 +79,7 @@ class mainModel {
     protected function verificarDatos($filtro, $cadena){
         //Utiliza la función preg_match() para verificar si la cadena coincide con el patrón especificado
         //El patrón es construido dinámicamente utilizando el filtro pasado como parámetro
-        if(preg_match("/^" . $filtro . "$/", $cadena)){
+        if(preg_match("/^".$filtro."$/", $cadena)){
             //Si la cadena coincide con el patrón, retorna false (indicando que los datos son válidos)
             return false;
         } else {
@@ -214,7 +214,6 @@ class mainModel {
     protected function paginadorTablas($pagina, $numeroPaginas, $url, $botones) {
         //Se inicializa la variable $tabla con el código HTML inicial del paginador.
         $tabla = '<nav class="pagination is-centered is-rounded" role="navigation" aria-label="pagination"><ul class="pagination-list">';
-        
         //Se verifica si la página actual es la primera. Si lo es, se muestra el botón "Anterior" deshabilitado.
         if ($pagina <= 1) {
             $tabla .= '<a class="pagination-previous is-disabled" disabled >Anterior</a>';
@@ -225,18 +224,49 @@ class mainModel {
             <li><a class="pagination-link" href="' . $url . '1/">1</a></li>
             <li><span class="pagination-ellipsis">&hellip;</span></li>';
         }
-        //El paginador continúa aquí generando enlaces para las páginas intermedias y el botón "Siguiente".
-        //El código para generar estos elementos debe estar presente aquí para que el paginador funcione correctamente.
-        //Finalmente, se cierra la estructura del paginador con el botón "Siguiente", la última página y el cierre de las etiquetas HTML.
-        //Dependiendo de la lógica de paginación que falte en este script, esta parte podría variar.
-        //La función debería devolver el código HTML completo del paginador generado.
+        //Inicializa la variable $ci en 0 para contar los botones mostrados
+        $ci = 0;
+        //Bucle que itera desde la página actual hasta el número total de páginas
+        for ($i = $pagina; $i <= $numeroPaginas; $i++) {
+            //Verifica si se han mostrado suficientes botones de paginación
+            if ($ci >= $botones) {
+                //Si se han mostrado suficientes botones, sale del bucle
+                break;
+            }
+            //Comprueba si la página actual es igual a la página en la iteración actual
+            if ($pagina == $i) {
+                //Si es la página actual, crea un enlace de paginación con la clase "is-current"
+                $tabla .= '<li><a class="pagination-link is-current" href="' . $url . $i . '/">' . $i . '</a></li>';
+            } else {
+                //Si no es la página actual, crea un enlace de paginación normal
+                $tabla .= '<li><a class="pagination-link" href="' . $url . $i . '/">' . $i . '</a></li>';
+            }
+                //Incrementa el contador de botones mostrados
+                $ci++;
+            }
+        //Verifica si la página actual es igual al número total de páginas
+        if ($pagina == $numeroPaginas) {
+            //Si es la última página, muestra el botón "Siguiente" deshabilitado
+            $tabla .= '
+            </ul>
+            <a class="pagination-next is-disabled" disabled>Siguiente</a>
+            ';
+        } else {
+            //Si no es la última página, muestra un indicador de elipsis, el enlace a la última página y el botón "Siguiente"
+            $tabla .= '
+            <li><span class="pagination-ellipsis">&hellip;</span></li>
+            <li><a class="pagination-link" href="' . $url . $numeroPaginas . '/">' . $numeroPaginas . '</a></li>
+            </ul>
+            <a class="pagination-next" href="' . $url . ($pagina + 1) . '/">Siguiente</a>
+            ';
+        }
+        //Cierra el elemento de navegación y devuelve la estructura completa
+        $tabla .= '</nav>';
+        //Devuelve la estructura HTML completa para la paginación
         return $tabla;
     }
-
-
-
-
       
 }
 
 ?>
+

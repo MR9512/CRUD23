@@ -1,7 +1,7 @@
 <div class="main-container">
     <!-- Contenedor principal del formulario -->
     
-    <form class="box login" action="" method="POST" autocomplete="off">
+    <form class="box login FormularioAjax" action="" method="POST" autocomplete="off">
         <!-- Formulario con clase 'box login', método de envío POST y autocompletado deshabilitado -->
 
         <h5 class="title is-5 has-text-centered is-uppercase">LOGIN</h5>
