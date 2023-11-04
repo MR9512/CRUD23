@@ -22,13 +22,13 @@
                     Usuarios <!-- Texto del enlace -->
                 </a>
                 <div class="navbar-dropdown is-boxed"> <!-- Menú desplegable -->
-                    <a class="navbar-item" href="#"> <!-- Elemento del menú desplegable como un enlace -->
+                    <a class="navbar-item" href="<?php echo APP_URL; ?>userNew/"> <!-- Elemento del menú desplegable como un enlace -->
                         Nuevo <!-- Texto del enlace -->
                     </a>
-                    <a class="navbar-item" href="#">
+                    <a class="navbar-item" href="<?php echo APP_URL; ?>userList/">
                         Lista
                     </a>
-                    <a class="navbar-item" href="#">
+                    <a class="navbar-item" href="<?php echo APP_URL; ?>userSearch/">
                         Buscar
                     </a>
                 </div>
@@ -41,14 +41,14 @@
                     ** User Name ** <!-- Nombre de usuario (puede ser dinámico según la sesión del usuario) -->
                 </a>
                 <div class="navbar-dropdown is-boxed"> <!-- Menú desplegable -->
-                    <a class="navbar-item" href="#"> <!-- Elemento del menú desplegable como un enlace -->
+                    <a class="navbar-item" href="<?php echo APP_URL; ?>userUpdate/"> <!-- Elemento del menú desplegable como un enlace -->
                         Mi cuenta <!-- Texto del enlace -->
                     </a>
-                    <a class="navbar-item" href="#">
+                    <a class="navbar-item" href="<?php echo APP_URL; ?>userPhoto/">
                         Mi foto
                     </a>
                     <hr class="navbar-divider"> <!-- Línea divisoria del menú desplegable -->
-                    <a class="navbar-item" href="#" id="btn_exit"> <!-- Elemento del menú desplegable como un enlace con un identificador "btn_exit" -->
+                    <a class="navbar-item" href="<?php echo APP_URL; ?>logOut/" id="btn_exit"> <!-- Elemento del menú desplegable como un enlace con un identificador "btn_exit" -->
                         Salir <!-- Texto del enlace -->
                     </a>
                 </div>

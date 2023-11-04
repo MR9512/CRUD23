@@ -48,5 +48,42 @@ formularios_ajax.forEach(formularios => {
 
 //Función para manejar las alertas y respuestas del servidor
 function alertas_ajax(alerta) {
-    //Implementa el código para manejar las respuestas del servidor y mostrar alertas al usuario
+    //Comprobar el tipo de alerta recibida del servidor
+    if(alerta.tipo=="simple"){
+        //Mostrar una alerta simple utilizando la biblioteca SweetAlert2
+        Swal.fire({
+            icon: alerta.icono,
+            title: alerta.titulo,
+            text: alerta.texto,
+            confirmButtonText: 'Aceptar'
+        });
+    } else if(alerta.tipo=="recargar"){
+        //Mostrar una alerta y recargar la página si el usuario confirma
+        Swal.fire({
+            icon: alerta.icono,
+            title: alerta.titulo,
+            text: alerta.texto,
+            confirmButtonText: 'Aceptar'
+          }).then((result) => {
+            if (result.isConfirmed) {
+               location.reload(); //Recargar la página actual
+            }
+          });
+    } else if(alerta.tipo=="limpiar"){
+        //Mostrar una alerta y limpiar un formulario si el usuario confirma
+        Swal.fire({
+            icon: alerta.icono,
+            title: alerta.titulo,
+            text: alerta.texto,
+            confirmButtonText: 'Aceptar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.querySelector(".FormularioAjax").reset(); // Limpiar el formulario con la clase .FormularioAjax
+            }
+        });
+    } else if(alerta.tipo=="redireccionar"){
+        //Redirigir a una URL especificada en la alerta
+        window.location.href=alerta.url; //Cambiar la ubicación del navegador a la URL proporcionada
+    }
 }
+

@@ -5,7 +5,7 @@ class viewsModel {
     // Método para obtener vistas
     protected function obtenerVistasModelo($vista) {
         // Lista blanca de vistas permitidas
-        $listaBlanca = ["dashboard"];
+        $listaBlanca = ["dashboard", "userNew","userList","userSearch","userUpdate","userPhoto","logOut"];
 
         // Verificar si la vista está en la lista blanca
         if (in_array($vista, $listaBlanca)) {
