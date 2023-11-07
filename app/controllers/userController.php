@@ -188,8 +188,8 @@
                     exit();
                 }
                 //Obtiene el nombre del archivo del formulario y reemplaza los espacios por guiones bajos
-                $nombre = $_FILES['usuario_foto']['name'];
-                $foto = str_ireplace(" ", "_", $nombre);
+                $nombreFoto = $_FILES['usuario_foto']['name'];
+                $foto = str_ireplace(" ", "_", $nombreFoto);
                 //Agrega un número aleatorio entre 0 y 100 al nombre del archivo para evitar duplicados
                 $foto = $foto . "_" . rand(0, 100);
                 //Verifica el tipo de archivo de la imagen cargada y ajusta la extensión del archivo
@@ -219,6 +219,73 @@
                 //Si no se selecciona una imagen, establece el nombre del archivo de imagen como una cadena vacía
                 $foto = "";
             }
+
+            $usuario_datos_reg = [
+                [
+                    "campo_nombre"=>"usuario_nombre",
+                    "campo_marcador"=>":Nombre",
+                    "campo_valor"=>$nombre
+                ],
+                [
+                    "campo_nombre"=>"usuario_apellido",
+                    "campo_marcador"=>":Apellido",
+                    "campo_valor"=>$apellido
+                ],
+                [
+                    "campo_nombre"=>"usuario_email",
+                    "campo_marcador"=>":Email",
+                    "campo_valor"=>$email
+                ],
+                [
+                    "campo_nombre"=>"usuario_usuario",
+                    "campo_marcador"=>":Usuario",
+                    "campo_valor"=>$usuario
+                ],
+                [
+                    "campo_nombre"=>"usuario_clave",
+                    "campo_marcador"=>":Clave",
+                    "campo_valor"=>$clave
+                ],
+                [
+                    "campo_nombre"=>"usuario_foto",
+                    "campo_marcador"=>":Foto",
+                    "campo_valor"=>$foto
+                ],
+                [
+                    "campo_nombre"=>"usuario_creado",
+                    "campo_marcador"=>":Creado",
+                    "campo_valor"=>date("Y-m-d H:i:s")
+                ],
+                [
+                    "campo_nombre"=>"usuario_actualizado",
+                    "campo_marcador"=>":Actualizado",
+                    "campo_valor"=>date("Y-m-d H:i:s")
+                ],
+            ];
+
+            $registrar_usuario=$this->guardarDatos("usuarios",$usuario_datos_reg);
+            if($registrar_usuario->rowCount()==1){
+                $alerta=[
+                    "tipo"=>"limpiar",
+                    "titulo"=>"Usuario registrado",
+                    "texto"=>"El usuario ".$nombre." ".$apellido." se registro con éxito",
+                    "icono"=>"success"
+                ];
+            }else{
+
+                if(is_file($img_dir.$foto)){
+                   chmod($img_dir.$foto,0777);
+                   unlink($img_dir.$foto);
+                }
+                $alerta=[
+                    "tipo"=>"simple",
+                    "titulo"=>"Ocurrió un error inesperado",
+                    "texto"=>"No se pudo registrar el usuario, por favor intente nuevamente",
+                    "icono"=>"error"
+                ];
+            }
+            return json_encode($alerta);
+
         }
     }
 ?>
