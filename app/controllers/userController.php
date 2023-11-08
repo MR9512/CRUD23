@@ -108,39 +108,39 @@
                     exit();
                 }
             }
-        //Verificando claves
-        //Verifica si las contraseñas ingresadas coinciden
-        if($clave1!=$clave2){
-            //Si las contraseñas no coinciden, devuelve un mensaje de error
-            $alerta=[
-                "tipo"=>"simple",
-                "titulo"=>"Ocurrió un error inesperado",
-                "texto"=>"Las contraseñas que acaba de ingresar no coinciden, por favor verifique e intente nuevamente",
-                "icono"=>"error"
-            ];
-            //Convierte el mensaje de error a formato JSON y lo devuelve
-            return json_encode($alerta);
-            //Finaliza la ejecución del script
-            exit();
-        }else{
-            //Si las contraseñas coinciden, hashea la contraseña para almacenarla de forma segura en la base de datos
-            $clave=password_hash($clave1,PASSWORD_BCRYPT,["cost"=>10]);
-        }
-        //Verifica si el nombre de usuario ya está registrado en la base de datos
-        $check_usuario=$this->ejecutarConsulta("SELECT usuario_usuario FROM usuarios WHERE usuario_usuario='$usuario'");
-        if($check_usuario->rowCount()>0){
-            //Si el nombre de usuario ya está registrado, devuelve un mensaje de error
-            $alerta=[
-                "tipo"=>"simple",
-                "titulo"=>"Ocurrió un error inesperado",
-                "texto"=>"El Usuario que acaba de ingresar ya se encuentra registrado en el sistema, por favor verifique e intente nuevamente",
-                "icono"=>"error"
-            ];
-            //Convierte el mensaje de error a formato JSON y lo devuelve
-            return json_encode($alerta);
-            //Finaliza la ejecución del script
-            exit();
-        }
+            //Verificando claves
+            //Verifica si las contraseñas ingresadas coinciden
+            if($clave1!=$clave2){
+                //Si las contraseñas no coinciden, devuelve un mensaje de error
+                $alerta=[
+                    "tipo"=>"simple",
+                    "titulo"=>"Ocurrió un error inesperado",
+                    "texto"=>"Las contraseñas que acaba de ingresar no coinciden, por favor verifique e intente nuevamente",
+                    "icono"=>"error"
+                ];
+                //Convierte el mensaje de error a formato JSON y lo devuelve
+                return json_encode($alerta);
+                //Finaliza la ejecución del script
+                exit();
+            }else{
+                //Si las contraseñas coinciden, hashea la contraseña para almacenarla de forma segura en la base de datos
+                $clave=password_hash($clave1,PASSWORD_BCRYPT,["cost"=>10]);
+            }
+            //Verifica si el nombre de usuario ya está registrado en la base de datos
+            $check_usuario=$this->ejecutarConsulta("SELECT usuario_usuario FROM usuarios WHERE usuario_usuario='$usuario'");
+            if($check_usuario->rowCount()>0){
+                //Si el nombre de usuario ya está registrado, devuelve un mensaje de error
+                $alerta=[
+                    "tipo"=>"simple",
+                    "titulo"=>"Ocurrió un error inesperado",
+                    "texto"=>"El Usuario que acaba de ingresar ya se encuentra registrado en el sistema, por favor verifique e intente nuevamente",
+                    "icono"=>"error"
+                ];
+                //Convierte el mensaje de error a formato JSON y lo devuelve
+                return json_encode($alerta);
+                //Finaliza la ejecución del script
+                exit();
+            }
             //Directorio donde se almacenarán las imágenes de perfil
             $img_dir="../views/fotos/";
 
@@ -220,70 +220,75 @@
                 $foto = "";
             }
 
+           //Definición del array $usuario_datos_reg con información del usuario
             $usuario_datos_reg = [
                 [
-                    "campo_nombre"=>"usuario_nombre",
-                    "campo_marcador"=>":Nombre",
-                    "campo_valor"=>$nombre
+                    "campo_nombre" => "usuario_nombre",       //Nombre del campo de la base de datos: usuario_nombre
+                    "campo_marcador" => ":Nombre",            //Marcador de posición para consultas preparadas: :Nombre
+                    "campo_valor" => $nombre                  //Valor del campo: $nombre (variable definida previamente)
                 ],
                 [
-                    "campo_nombre"=>"usuario_apellido",
-                    "campo_marcador"=>":Apellido",
-                    "campo_valor"=>$apellido
+                    "campo_nombre" => "usuario_apellido",     //Nombre del campo de la base de datos: usuario_apellido
+                    "campo_marcador" => ":Apellido",          //Marcador de posición para consultas preparadas: :Apellido
+                    "campo_valor" => $apellido                //Valor del campo: $apellido (variable definida previamente)
                 ],
                 [
-                    "campo_nombre"=>"usuario_email",
-                    "campo_marcador"=>":Email",
-                    "campo_valor"=>$email
+                    "campo_nombre" => "usuario_email",        //Nombre del campo de la base de datos: usuario_email
+                    "campo_marcador" => ":Email",             //Marcador de posición para consultas preparadas: :Email
+                    "campo_valor" => $email                   //Valor del campo: $email (variable definida previamente)
                 ],
                 [
-                    "campo_nombre"=>"usuario_usuario",
-                    "campo_marcador"=>":Usuario",
-                    "campo_valor"=>$usuario
+                    "campo_nombre" => "usuario_usuario",      //Nombre del campo de la base de datos: usuario_usuario
+                    "campo_marcador" => ":Usuario",           //Marcador de posición para consultas preparadas: :Usuario
+                    "campo_valor" => $usuario                 //Valor del campo: $usuario (variable definida previamente)
                 ],
                 [
-                    "campo_nombre"=>"usuario_clave",
-                    "campo_marcador"=>":Clave",
-                    "campo_valor"=>$clave
+                    "campo_nombre" => "usuario_clave",        //Nombre del campo de la base de datos: usuario_clave
+                    "campo_marcador" => ":Clave",             //Marcador de posición para consultas preparadas: :Clave
+                    "campo_valor" => $clave                   //Valor del campo: $clave (variable definida previamente)
                 ],
                 [
-                    "campo_nombre"=>"usuario_foto",
-                    "campo_marcador"=>":Foto",
-                    "campo_valor"=>$foto
+                    "campo_nombre" => "usuario_foto",         //Nombre del campo de la base de datos: usuario_foto
+                    "campo_marcador" => ":Foto",              //Marcador de posición para consultas preparadas: :Foto
+                    "campo_valor" => $foto                    //Valor del campo: $foto (variable definida previamente)
                 ],
                 [
-                    "campo_nombre"=>"usuario_creado",
-                    "campo_marcador"=>":Creado",
-                    "campo_valor"=>date("Y-m-d H:i:s")
+                    "campo_nombre" => "usuario_creado",       //Nombre del campo de la base de datos: usuario_creado
+                    "campo_marcador" => ":Creado",            //Marcador de posición para consultas preparadas: :Creado
+                    "campo_valor" => date("Y-m-d H:i:s")      //Valor del campo: fecha y hora actual en formato 'Y-m-d H:i:s'
                 ],
                 [
-                    "campo_nombre"=>"usuario_actualizado",
-                    "campo_marcador"=>":Actualizado",
-                    "campo_valor"=>date("Y-m-d H:i:s")
-                ],
+                    "campo_nombre" => "usuario_actualizado",  //Nombre del campo de la base de datos: usuario_actualizado
+                    "campo_marcador" => ":Actualizado",       //Marcador de posición para consultas preparadas: :Actualizado
+                    "campo_valor" => date("Y-m-d H:i:s")      //Valor del campo: fecha y hora actual en formato 'Y-m-d H:i:s'
+                ]
             ];
-
-            $registrar_usuario=$this->guardarDatos("usuarios",$usuario_datos_reg);
-            if($registrar_usuario->rowCount()==1){
-                $alerta=[
-                    "tipo"=>"limpiar",
-                    "titulo"=>"Usuario registrado",
-                    "texto"=>"El usuario ".$nombre." ".$apellido." se registro con éxito",
-                    "icono"=>"success"
+             //Guarda los datos del usuario en la base de datos y obtiene el resultado
+            $registrar_usuario = $this->guardarDatos("usuarios", $usuario_datos_reg);
+            //Verifica si se registró correctamente un usuario
+            if ($registrar_usuario->rowCount() == 1) {
+                //Si se registró correctamente, crea un mensaje de alerta tipo "limpiar"
+                $alerta = [
+                    "tipo" => "limpiar",
+                    "titulo" => "Usuario registrado",
+                    "texto" => "El usuario " . $nombre . " " . $apellido . " se registró con éxito",
+                    "icono" => "success"
                 ];
-            }else{
-
-                if(is_file($img_dir.$foto)){
-                   chmod($img_dir.$foto,0777);
-                   unlink($img_dir.$foto);
+            } else {
+                //Si no se pudo registrar el usuario, verifica si la imagen del usuario existe y la elimina
+                if (is_file($img_dir . $foto)) {
+                    chmod($img_dir . $foto, 0777); //Cambia los permisos del archivo a 0777 (lectura, escritura y ejecución para todos)
+                    unlink($img_dir . $foto); //Elimina el archivo de imagen del usuario
                 }
-                $alerta=[
-                    "tipo"=>"simple",
-                    "titulo"=>"Ocurrió un error inesperado",
-                    "texto"=>"No se pudo registrar el usuario, por favor intente nuevamente",
-                    "icono"=>"error"
+                //Crea un mensaje de alerta tipo "simple" indicando que ocurrió un error
+                $alerta = [
+                    "tipo" => "simple",
+                    "titulo" => "Ocurrió un error inesperado",
+                    "texto" => "No se pudo registrar el usuario, por favor intente nuevamente",
+                    "icono" => "error"
                 ];
             }
+            //Devuelve el mensaje de alerta en formato JSON
             return json_encode($alerta);
 
         }
