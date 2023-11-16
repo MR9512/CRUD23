@@ -36,6 +36,11 @@ if(isset($_GET['views'])){
     if($vista == "login" || $vista == "404"){
        require_once "app/views/content/" . $vista . "-view.php";
     } else {
+        //Cerrar Sesión
+        if(!isset($_SESSION['id']) || !isset($_SESSION['nombre']) || !isset($_SESSION['usuario']) || isset($_SESSION['id']) == "" || isset($_SESSION['nombre']) == "" || isset($_SESSION['usuario']) == ""){
+            $insLogin->cerrarSesionControlador();
+            exit();
+        }
        require_once "app/views/inc/nabvar.php";
        require_once $vista;
     }

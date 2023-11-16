@@ -5,8 +5,8 @@
 	use app\models\mainModel;
 	//Definición de la clase "loginController" que extiende la clase "mainModel"
 	class loginController extends mainModel {
-	//Método para iniciar sesión del usuario
-	public function iniciarSesionControlador() {
+		//Método para iniciar sesión del usuario
+		public function iniciarSesionControlador() {
 		//Obtiene y limpia el valor del campo 'login_usuario' del formulario de inicio de sesión
 		$usuario = $this->limpiarCadena($_POST['login_usuario']);
 		//Obtiene y limpia el valor del campo 'login_clave' del formulario de inicio de sesión
